@@ -2,7 +2,8 @@ const asyncHandler = require('express-async-handler')
 const Blog = require('../models/blogModel')
 
 const getBlogs = asyncHandler(async (req, res) => {
-    const blogs = await Blog.find()
+    const blogs = await Blog.find().populate('user').sort({createdAt:-1})
+    
     res.status(200).json(blogs)
 })
 
